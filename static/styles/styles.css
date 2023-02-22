@@ -1,0 +1,272 @@
+.nav-heading {
+    position: relative;
+    font-family: "Raleway", sans-serif;
+    font-weight: 300;
+    font-size: 35px;
+    font-weight: 200;
+    color: rgba(0, 140, 255, 0.76);
+}
+
+.hero-heading {
+    position: relative;
+    font-family: "Raleway", sans-serif;
+    font-weight: 700;
+    font-size: 50px;
+    color: rgba(0, 140, 255, 0.76);
+    -webkit-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+
+.hero-section {
+    padding: 50px;
+    text-align: center;
+}
+
+.search-bar {
+    max-width: 700px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: auto;
+}
+
+#searchQueryInput {
+    width: 100%;
+    height: 2.8rem;
+    background: #f5f5f5;
+    outline: none;
+    border: none;
+    border-radius: 1.625rem;
+    padding: 0 3.5rem 0 1.5rem;
+    font-size: 1rem;
+}
+
+#searchQuerySubmit {
+    width: 3.5rem;
+    height: 2.8rem;
+    margin-left: -3.5rem;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.pagination {
+    text-align: center;
+}
+
+.pagination-btn {
+    margin: auto;
+}
+
+.pagination a {
+    color: black;
+    text-decoration: none;
+    padding: 10px 30px;
+}
+
+.pagination a.active {
+    background-color: rgba(0, 140, 255, 0.76);
+    color: white;
+    border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+    border-radius: 5px;
+}
+
+
+.slang {
+    font-family: 'Raleway', sans-serif;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.main-heading {
+    position: relative;
+    font-family: "Raleway", sans-serif;
+    font-weight: 300;
+    font-size: 45px;
+    color: rgba(0, 140, 255, 0.76);
+    -webkit-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+
+.main-heading>a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.sub-heading {
+    display: inline;
+    font-family: "Raleway", sans-serif;
+    font-weight: 300;
+    font-size: 40px;
+    color: #080808;
+
+}
+
+.profile-name {
+    padding: 0;
+    margin: 0;
+    font-family: "Raleway", sans-serif;
+    font-weight: 300;
+    font-size: 40px;
+    text-transform: uppercase;
+    color: black
+}
+
+.profile-name>a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.room-image {
+    object-fit: cover;
+}
+.profile-image {
+    margin: auto;
+    object-fit: cover;
+    border-radius: 50%
+}
+
+
+
+.job-title {
+    font-size: 15px;
+    color: #444;
+    word-spacing: 1px;
+    font-weight: normal;
+    letter-spacing: 2px;
+    text-transform: capitalize;
+    font-family: "Raleway", sans-serif;
+    font-weight: 500;
+
+}
+
+.profile-bio {
+    font-family: 'Raleway', sans-serif;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.inside-image {
+    object-fit: cover;
+    border-radius: 50%
+}
+
+.main-section {
+    text-align: center;
+}
+
+.image-container-sm {
+    width: 48px;
+    height: 48px;
+}
+
+.image-container-md {
+    max-width: 400px;
+    height: 200px;
+}
+
+.image-container-lg {
+    width: 400px;
+    height: 400px;
+}
+
+.nav-inline {
+    display: inline-block
+}
+
+.buttons {
+    margin: auto;
+    align-items: center;
+}
+
+.alert {
+    position: absolute;
+    z-index: 101;
+    right: 10px;
+    margin: 0;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 0px;
+}
+
+
+.errorlist {
+    color: red;
+    list-style-type: none;
+    margin: 0;
+}
+
+.fa-plus {
+    position: relative;
+    top: 0px;
+    transition: top ease 0.6s;
+}
+
+.fa-plus:hover {
+    top: 5px;
+}
+
+.fa-xmark {
+    position: relative;
+    top: 0;
+    transition: top ease 0.5s;
+    color: rgb(225, 0, 0);
+}
+
+.fa-xmark:hover {
+    top: 5px;
+}
+
+
+.fa-chevron-left {
+    color: rgba(0, 140, 255, 0.76);
+}
+
+.fa-chevron-right {
+    color: rgba(0, 140, 255, 0.76);
+}
+
+.social-link {
+    margin: auto;
+}
+
+.btn-primary {
+    background-color: rgb(0, 140, 255);
+    border-color: rgb(0, 140, 255);
+    border-radius: 5%;
+}
+
+.room-card {
+    box-shadow: 0 8px 16px 0 #0000003e;
+    padding: 5px;
+    border-radius: 2%;
+}
+
+#rooms-view>div {
+    display: inline-flex;
+}
+
+.message-text-me {
+    background-color: #0D6EFD;
+    color: white;
+}
+
+.message-text-other {
+    background-color: #f5f6f7;
+}
+
+.me {
+    display: flex;
+    justify-content: end;
+}
+
+.other {
+    display: flex;
+    justify-content: start;
+}

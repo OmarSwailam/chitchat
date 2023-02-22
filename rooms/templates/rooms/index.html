@@ -1,0 +1,54 @@
+{% include 'core/layout.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="main-section">
+
+        <div class="buttons">
+            <button id="all-rooms" type="button" class="btn m-2 btn-outline-primary">
+                All Rooms
+            </button>
+            <button id="joined-rooms" type="button" class="btn m-2 btn-outline-primary">
+                Joined Rooms
+            </button>
+            <button id="created-rooms" type="button" class="btn m-2 btn-outline-primary">
+                Created By You
+            </button>
+            <button type="button" class="btn m-2 btn-outline-primary new-room" data-bs-toggle="modal"
+                data-bs-target="#newRoomModal">
+                Create <i class="fa-solid fa-plus"></i>
+            </button>
+        </div>
+
+        <div class="modal fade" id="newRoomModal" tabindex="-1" aria-labelledby="newRoomModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="NewRoomModal">Create New Room</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="newRoomForm" action="{% url 'create_room' %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form }}
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                        <button form="newRoomForm" type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div id="rooms-view" class="row justify-content-center">
+
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

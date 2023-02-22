@@ -1,0 +1,124 @@
+{% include 'core/layout.html' %}
+{% block content %}
+
+<a class="ms-5" href="{% url 'index' %}">Back to all rooms</a>
+<section>
+    <div class="container py-5">
+        <div class="room-card" style="border-radius: 15px;">
+            <div class="row">
+                <div class="col-2"><img class="inside-image image-container-sm" src="{{ room.image.url }}">
+                </div>
+                <div class="col-10">
+                    <h1 class="main-heading">{{ room.name }}</h1>
+                </div>
+            </div>
+            <hr>
+            <div id="messages">
+                {% for m in room_messages %}
+                {% if m.user == request.user %}
+                <div class="d-flex flex-row me">
+                    <div>
+                        <div class="small text-muted"> {{ m.user.name }} | {{ m.user.email}}</div>
+                        <div class="message-text-me small p-2 rounded-3">{{ m.content }}</div>
+                        <div class="small text-muted float-end">{{ m.created }}</div>
+                    </div>
+                    <img class="inside-image image-container-sm" src="{{ m.user.image.url }}" style="width: 45px; height: 100%;">
+                </div>
+                {% else %}
+                <div class="d-flex flex-row other">
+                    <img class="inside-image image-container-sm" src="{{ m.user.image.url }}" style="width: 45px; height: 100%;">
+                    <div>
+                        <div class="small text-muted"> {{ m.user.name }} | {{ m.user.email}}</div>
+                        <div class="message-text-other small p-2 rounded-3">{{ m.content }}</div>
+                        <div class="small text-muted float-end">{{ m.created }}</div>
+                    </div>
+                </div>
+
+                {% endif %}
+                {% endfor %}
+            </div>
+
+            <hr>
+            <div id="chat-input" class="text-muted d-flex justify-content-start align-items-center pe-3 pt-3 mt-2">
+
+                <input id="chat-message-input" type="text" class="form-control form-control-lg"
+                    placeholder="Type message">
+                <button id="chat-message-submit" class="btn btn-outline-primary ms-3">
+                    <i class="fas fa-paper-plane"></i></button>
+            </div>
+
+            <br>
+        </div>
+    </div>
+
+</section>
+{% endblock %}
+
+{% block include_js %}
+{{ room.id|json_script:"room-id" }}
+{{ request.user.serialize|json_script:"request-user" }}
+<script>
+    const roomId = JSON.parse(document.getElementById('room-id').textContent);
+    const requestUser = JSON.parse(document.getElementById('request-user').textContent);
+    const url = 'ws://' + window.location.host + '/ws/room/' + roomId + '/';
+    const chatSocket = new WebSocket(url);
+
+    chatSocket.onmessage = function (event) {
+        const data = JSON.parse(event.data);
+        const messages = document.getElementById('messages');
+        const dateOptions = { day: 'numeric', month: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
+        const datetime = new Date(data.datetime).toLocaleString('en', dateOptions);
+        const isMe = data['user']['id'] === requestUser['id'];
+        const source = isMe ? 'me' : 'other';
+        const name = data.user.name + ' | ' + data.user.email;
+        if (isMe) {
+            messages.innerHTML += `<div class="d-flex flex-row ${source}">
+                <div>
+                    <div class="small text-muted"> ${name}</div>
+                    <div class="message-text-${source} small p-2 rounded-3">${data.message}</div>
+                    <div class="small text-muted float-end">${datetime}</div>
+                </div>
+                <img class="inside-image image-container-sm" src="${data.user.image}" style="width: 45px; height: 100%;">
+            </div>`;
+        } else {
+            messages.innerHTML += `<div class="d-flex flex-row ${source}">
+                <img class="inside-image image-container-sm" src="${data.user.image}" style="width: 45px; height: 100%;">
+                    <div>
+                        <div class="small text-muted"> ${name}</div>
+                        <div class="message-text-${source} small p-2 rounded-3">${data.message}</div>
+                        <div class="small text-muted float-end">${datetime}</div>
+                    </div>
+                </div>`;
+        }
+
+        window.scrollTo(0, document.body.scrollHeight);
+    };
+
+
+    chatSocket.onclose = function (event) {
+        console.error('Chat socket closed unexpectedly');
+    };
+
+    const input = document.getElementById('chat-message-input');
+    const submitButton = document.getElementById('chat-message-submit');
+
+    submitButton.addEventListener('click', function (event) {
+        const message = input.value;
+        if (message) {
+            chatSocket.send(JSON.stringify({ 'message': message, 'room_id': roomId, 'user': requestUser }));
+            input.value = '';
+            input.focus();
+        }
+    });
+
+
+    input.addEventListener('keypress', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            submitButton.click();
+        }
+    });
+    input.focus();
+
+</script>
+{% endblock %}

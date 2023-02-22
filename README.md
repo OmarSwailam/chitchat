@@ -1,4 +1,4 @@
-# Chit Chat Web APP
+# Chit Chat
 Django Web application for group chatting using websockets via Channels library for real time communication, where users can create or join chat rooms.
 
 ## How Chit Chat works ?
@@ -10,8 +10,15 @@ Django Web application for group chatting using websockets via Channels library 
 
 - Accessing a room will view the chat messages, and the user will also be able to send messages.
 
-### Tech used:
+## Tech used:
 Python - Django - Channels library and web sockets for asynchronous communication - JavaScript - Bootstrap - HTML - CSS
+
+[Demonstration video](https://youtu.be/m-sv0KKBqnE)
+
+### screenshots
+![Screenshot](https://github.com/OmarSwailam/chitchat/blob/main/screenshots/Screenshot%20(181).png)
+![Screenshot](https://github.com/OmarSwailam/chitchat/blob/main/screenshots/Screenshot%20(182).png)
+![Screenshot](https://github.com/OmarSwailam/chitchat/blob/main/screenshots/Screenshot_20230222_122216.png)
 
 
 ## Running app
@@ -19,6 +26,7 @@ Python - Django - Channels library and web sockets for asynchronous communicatio
 ```
 
 # Clone repository
+  git clone https://github.com/OmarSwailam/chitchat.git
 
 # Create a virtualenv(optional)
   python3 -m venv env

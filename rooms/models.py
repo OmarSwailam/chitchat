@@ -64,4 +64,4 @@ class RoomMessage(models.Model):
         }
 
     def __str__(self) -> str:
-        return self.name
+        return f"{self.user} - {self.room} - {self.created}"

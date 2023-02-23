@@ -32,15 +32,18 @@ def rooms(request, rooms_type):
     return JsonResponse([room.serialize() for room in rooms], safe=False)
 
 
-@login_required(login_url='login')
+@login_required(login_url="login")
 def create_room(request):
-    form = RoomForm(request.POST, request.FILES)
-    if form.is_valid():
-        room = form.save(commit=False)
-        room.admin = request.user
-        room.save()
-        room.members.add(request.user)
-        return redirect('index')
+    if request.method == "POST":
+        form = RoomForm(request.POST, request.FILES)
+        if form.is_valid():
+            room = form.save(commit=False)
+            room.admin = request.user
+            room.save()
+            room.members.add(request.user)
+            return redirect("index")
+    if request.method == "GET":
+        return redirect("index")
 
 
 def room(request, pk):
